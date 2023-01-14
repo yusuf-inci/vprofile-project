@@ -1,4 +1,23 @@
 Insructions cover only Ubuntu 22.04
 Start with local-setup branch
 Go .../vprofile-project/vagrant/Manual_provisioning folder, install vagrant-hostmanager plugin and run vagrant up
-Once vms up check connections and configurations among each of them. Run vagrant ssh <hostname> ex:web01 and inside host check /etc/hosts file, also ping the hosts according to schema. 
+Once vms up check connections and configurations among each of them. Run vagrant ssh <hostname> ex:web01 and inside host check /etc/hosts file, also ping the hosts according to schema.
+Login to the db vm ex: 
+vagrant ssh db01
+Update OS with latest patches 
+yum update -y
+configure source
+DATABASE_PASS='' //give password
+vi /etc/profile // write DATABASE_PASS=''
+source /etc/profile
+Set Repository
+yum install epel-release -y
+Install Maria DB Package
+yum install git mariadb-server -y
+Starting & enabling mariadb-server
+systemctl start mariadb
+systemctl enable mariadb
+RUN mysql secure installation script
+mysql_secure_installation
+test DB user
+mysql -u root -p
